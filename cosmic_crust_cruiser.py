@@ -13,6 +13,11 @@ SHIP_SPEED = 5
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Cosmic Crust Cruiser")
 
+# Load the background image
+background_img = pygame.image.load('background.png')
+#background_img = pygame.transform.scale(background_img, (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+
 # Load spaceship image
 ship_img = pygame.image.load("spaceship.png")
 ship_rect = ship_img.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
@@ -68,7 +73,8 @@ while running:
         #print("Collision detected! Game over.")
           
     # Drawing
-    screen.fill((0,0,0)) # Fills the screen with black space
+    #screen.fill((0,0,0)) # Fills the screen with black space
+    screen.blit(background_img, (0, 0))
     screen.blit(ship_img, ship_rect) # Draws the spaceship
 
     pygame.display.flip() # Update the display
