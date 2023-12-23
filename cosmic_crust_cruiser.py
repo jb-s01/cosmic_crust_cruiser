@@ -1,6 +1,6 @@
 import pygame
 import sys
-import numpy as np
+import random
 
 # Initialize Pygame
 pygame.init()
@@ -15,15 +15,16 @@ pygame.display.set_caption("Cosmic Crust Cruiser")
 
 # Load spaceship image
 ship_img = pygame.image.load("spaceship.png")
-ship_rect = ship_img.get_rect(center=(SCREEN_WIDTH/4, SCREEN_HEIGHT/4))
+ship_rect = ship_img.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
 
 # Load asteroid image
 asteroid_img = pygame.image.load("asteroid.png")
+asteroid_rect = asteroid_img.get_rect(topleft=(800, random.randint(0, SCREEN_HEIGHT)))
 asteroids = []
 
 # Function to create a new asteroid
 def create_asteroid():
-    new_asteroid = asteroid_img.get_rect(topleft=(np.random.randint(800, 1600), np.random.randint(0, 600)))
+    new_asteroid = asteroid_img.get_rect(topleft=(random.randint(800, 1600), random.randint(0, 600)))
     asteroids.append(new_asteroid)
 
 # Function to move and draw asteroids
@@ -50,24 +51,22 @@ while running:
 
     # Movement keys
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] and ship_rect.left > 0:
         ship_rect.x -= SHIP_SPEED
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and ship_rect.right < SCREEN_WIDTH:
         ship_rect.x += SHIP_SPEED
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] and ship_rect.top > 0:
         ship_rect.y -= SHIP_SPEED
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] and ship_rect.bottom < SCREEN_HEIGHT:
         ship_rect.y += SHIP_SPEED
 
     # Obstacle: Create a new asteroid every so often
-    if np.random.randint(1, 50) == 1:
+    if random.randint(1, 50) == 1:
         create_asteroid()
     move_asteroids()
-
-    if detect_collisions():
-        print("Collision detected! Game over.")
-        running = False
-    
+    #if detect_collisions():
+        #print("Collision detected! Game over.")
+          
     # Drawing
     screen.fill((0,0,0)) # Fills the screen with black space
     screen.blit(ship_img, ship_rect) # Draws the spaceship
