@@ -8,6 +8,7 @@ pygame.init()
 # Constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
 SHIP_SPEED = 5
+clock = pygame.time.Clock()
 
 # Set up the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -24,7 +25,8 @@ ship_rect = ship_img.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
 
 # Load asteroid image
 asteroid_img = pygame.image.load("asteroid.png")
-asteroid_rect = asteroid_img.get_rect(topleft=(800, random.randint(0, SCREEN_HEIGHT)))
+asteroid_x_pos = 600
+"""asteroid_rect = asteroid_img.get_rect(topleft=(800, random.randint(0, SCREEN_HEIGHT)))
 asteroids = []
 
 # Function to create a new asteroid
@@ -45,7 +47,7 @@ def detect_collisions():
         if ship_rect.colliderect(asteroid):  # Check if the spaceship rectangle collides with an asteroid
             return True
     return False
-
+"""
 # Game loop
 running = True
 while running:
@@ -65,19 +67,25 @@ while running:
     if keys[pygame.K_DOWN] and ship_rect.bottom < SCREEN_HEIGHT:
         ship_rect.y += SHIP_SPEED
 
+    """
     # Obstacle: Create a new asteroid every so often
     if random.randint(1, 50) == 1:
         create_asteroid()
     move_asteroids()
     #if detect_collisions():
         #print("Collision detected! Game over.")
-          
+    """      
     # Drawing
     #screen.fill((0,0,0)) # Fills the screen with black space
     screen.blit(background_img, (0, 0))
     screen.blit(ship_img, ship_rect) # Draws the spaceship
+    asteroid_x_pos -= 4
+    if asteroid_x_pos < -25: asteroid_x_pos = 250
+    screen.blit(asteroid_img, (asteroid_x_pos, 250))
 
     pygame.display.flip() # Update the display
+    clock.tick(60)
+
 
 # Clean up
 pygame.quit()
