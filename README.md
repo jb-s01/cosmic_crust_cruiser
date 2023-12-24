@@ -1,5 +1,5 @@
 # Cosmic Crust Cruiser
-
+[](/banner.png)
 ## The Intergalactic Pizza Odyssey
 
 In the vast expanse of the retro-futuristic galaxy, where starlight twinkles like the cheese on a freshly baked pizza, you are the most daring pilot of the "Cosmic Crust Cruiser," the galaxy's premier pizza delivery spacecraft.
